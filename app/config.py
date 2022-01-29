@@ -7,9 +7,10 @@ class Config:
     config = ''
     config_default_path = ''
     
-    def __init__(self, path='/node_bot/app/config.ini'):
+    def __init__(self, path='/app/config.ini'):
         self.config = configparser.ConfigParser()
         self.config_default_path = os.getcwd()+path
+        print(self.config_default_path)
         self.config.read(self.config_default_path, encoding='utf-8')
         
     def getValue(self, section, key):
@@ -41,13 +42,11 @@ class Config:
 ''' 
 # test
 cfg = Config()
-host = cfg.get("database", "host")
-host = cfg.set("file", "host", "123")
-host = cfg.set("file", "host", "1234")
-host = cfg.set("file", "host2", "123")
+host = cfg.getValue("database", "host")
+cfg.setValue("file", "host", "123")
+print(host)
+
 cfg.removeSection("database2")
 cfg.removeKey("file", "host2")
 
-
-print(host)
  '''
